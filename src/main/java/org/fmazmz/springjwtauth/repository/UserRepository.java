@@ -1,5 +1,6 @@
-package org.fmazmz.springjwtauth;
+package org.fmazmz.springjwtauth.repository;
 
+import org.fmazmz.springjwtauth.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

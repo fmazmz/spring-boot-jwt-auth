@@ -1,4 +1,4 @@
-package org.fmazmz.springjwtauth;
+package org.fmazmz.springjwtauth.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;

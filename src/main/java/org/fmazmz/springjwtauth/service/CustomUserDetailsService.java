@@ -1,5 +1,6 @@
-package org.fmazmz.springjwtauth;
+package org.fmazmz.springjwtauth.service;
 
+import org.fmazmz.springjwtauth.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;

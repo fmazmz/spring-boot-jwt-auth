@@ -1,4 +1,4 @@
-package org.fmazmz.springjwtauth;
+package org.fmazmz.springjwtauth.model;
 
 public enum Role {
     USER,

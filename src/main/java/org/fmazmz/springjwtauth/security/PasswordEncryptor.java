@@ -1,4 +1,4 @@
-package org.fmazmz.springjwtauth;
+package org.fmazmz.springjwtauth.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

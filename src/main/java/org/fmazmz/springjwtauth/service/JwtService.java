@@ -1,24 +1,28 @@
-package org.fmazmz.springjwtauth;
+package org.fmazmz.springjwtauth.service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import org.fmazmz.springjwtauth.model.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.crypto.SecretKey;
 import java.util.Date;
 
 @Service
 public class JwtService {
 
     @Value("${auth.jwt.signing-key}")
-    private String SECRET;
+    private String secret;
+
+    private SecretKey signingKey() {
+        return Keys.hmacShaKeyFor(secret.getBytes());
+    }
 
     public Claims extractClaims(String token) {
         return Jwts.parserBuilder()
-                // RSA / HMAC?
-                .setSigningKey(Keys.hmacShaKeyFor(SECRET.getBytes()))
+                .setSigningKey(signingKey())
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
@@ -38,7 +42,7 @@ public class JwtService {
                 .setSubject(user.getUsername())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60))
-                .signWith(SignatureAlgorithm.HS256, SECRET)
+                .signWith(signingKey())
                 .compact();
     }
 }
