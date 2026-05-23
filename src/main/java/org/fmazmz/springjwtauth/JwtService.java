@@ -4,6 +4,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -11,7 +12,8 @@ import java.util.Date;
 @Service
 public class JwtService {
 
-    private final String SECRET = "signing-key";
+    @Value("${auth.jwt.signing-key}")
+    private String SECRET;
 
     public Claims extractClaims(String token) {
         return Jwts.parserBuilder()

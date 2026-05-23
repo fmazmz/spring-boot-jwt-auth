@@ -9,3 +9,8 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+
+auth:
+  # HMAC-256 (>=32 bytes)
+  jwt:
+    signing-key: ${JWT_SIGNING_KEY}
