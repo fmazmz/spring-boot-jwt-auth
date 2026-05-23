@@ -1,3 +1,11 @@
 spring:
   application:
     name: spring-jwt-auth
+  datasource:
+    url: jdbc:postgresql://localhost:5432/auth_db
+    username: root
+    password: root
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
