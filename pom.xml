@@ -28,8 +28,8 @@
     </scm>
     <properties>
         <java.version>25</java.version>
-        <jjwt-io-api.version>0.13.0</jjwt-io-api.version>
-        <jjwt-io-impl.version>0.12.6</jjwt-io-impl.version>
+        <jjwt-io-api.version>0.11.5</jjwt-io-api.version>
+        <jjwt-io-impl.version>0.11.5</jjwt-io-impl.version>
     </properties>
     <dependencies>
         <dependency>

@@ -18,7 +18,14 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
         // missing token
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            doFilterInternal(request, response, filterChain);
+            filterChain.doFilter(request, response);
+            return;
         }
+
+        String token = authHeader.substring(7);
+
+        // todo: validate token
+
+        filterChain.doFilter(request, response);
     }
 }
