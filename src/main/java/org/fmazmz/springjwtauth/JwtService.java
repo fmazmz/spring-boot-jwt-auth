@@ -2,6 +2,7 @@ package org.fmazmz.springjwtauth;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Service;
 
@@ -28,5 +29,14 @@ public class JwtService {
     public boolean isTokenValid(String token) {
         Claims claims = extractClaims(token);
         return claims.getExpiration().after(new Date());
+    }
+
+    public String generateToken(User user) {
+        return Jwts.builder()
+                .setSubject(user.getUsername())
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60))
+                .signWith(SignatureAlgorithm.HS256, SECRET)
+                .compact();
     }
 }
