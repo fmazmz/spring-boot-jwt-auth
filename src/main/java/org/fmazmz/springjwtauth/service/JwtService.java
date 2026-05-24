@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
+import java.time.Duration;
 import java.util.Date;
 
 @Service
@@ -15,6 +16,12 @@ public class JwtService {
 
     @Value("${auth.jwt.signing-key}")
     private String secret;
+    @Value("${auth.jwt.issuer}")
+    private String issuer;
+    @Value("${auth.jwt.audience}")
+    private String audience;
+    @Value("${auth.jwt.access-token-ttl}")
+    private Duration tokenTtl;
 
     private SecretKey signingKey() {
         return Keys.hmacShaKeyFor(secret.getBytes());
@@ -40,8 +47,10 @@ public class JwtService {
     public String generateToken(User user) {
         return Jwts.builder()
                 .setSubject(user.getUsername())
+                .setAudience(audience)
+                .setIssuer(issuer)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60))
+                .setExpiration(new Date(System.currentTimeMillis() + tokenTtl.toMillis()))
                 .signWith(signingKey())
                 .compact();
     }

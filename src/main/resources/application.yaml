@@ -14,3 +14,6 @@ auth:
   # HMAC-256 (>=32 bytes)
   jwt:
     signing-key: ${JWT_SIGNING_KEY}
+    issuer: http://localhost:8080
+    audience: spring-jwt-auth
+    access-token-ttl: PT15M
